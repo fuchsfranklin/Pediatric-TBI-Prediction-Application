@@ -1,0 +1,12 @@
+name: Pediatric-TBI-Prediction-Application
+title: Pediatric-TBI-Prediction-Application
+username:
+account: franklinfuchs
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3436639
+bundleId: 4044138
+url: https://franklinfuchs.shinyapps.io/Pediatric-TBI-Prediction-Application/
+when: 1609382520.47803
+asMultiple: FALSE
+asStatic: FALSE
