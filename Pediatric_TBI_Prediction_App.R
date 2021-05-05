@@ -107,7 +107,7 @@ ui <- navbarPage(theme = shinytheme("simplex"),
                                         style = "height: 20px; width: 200px;"
                                       ),
                                       tags$h3("Result"),
-                                      h5(textOutput("text"))
+                                      h4(strong(textOutput("text")))
                             , width = 4)
                           )
                  ),
