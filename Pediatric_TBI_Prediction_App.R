@@ -1,6 +1,7 @@
 ###################################################################
 # Environment Setup
 ###################################################################
+library(devtools)
 library(shiny)
 library(shinythemes)
 library(ggplot2)
@@ -14,27 +15,24 @@ library(class)
 library(mltools)    
 library(ROCR)      
 library(pROC)      
-library(DMwR)       
+#library(DMwR, lib.loc = "4.0")       
 library(C50)   
-
-load("C50_SMOTE.RData")
-load("SingleI_STR.RData")
 
 ###################################################################
 # UI
 ###################################################################
 theme_set(theme_bw())
 
-ui <- navbarPage(theme = shinytheme("paper"),
+ui <- navbarPage(theme = shinytheme("simplex"),
                  
-                 title = "TBI Mortality Prediction Web-Application",
+                 title = "Traumatic Brain Injury (TBI) Mortality Prediction Web-Application",
                  
 ###################################################################
 # Main Tab
 ###################################################################                
                  tabPanel(title = "(For US-based Pediatric TBI Patients)",
                           tags$ul(
-                            tags$li("Enter patient information below and press the \"Predict\" button to return a mortality prediction and an associated probability between  1% and 100%."),
+                            tags$li("Enter patient information below and press the \"Predict\" button to return a mortality prediction and an associated probability between 0% and 100%."),
                           ),
                           
                           sidebarLayout(
@@ -103,7 +101,7 @@ ui <- navbarPage(theme = shinytheme("paper"),
                               ),
                               actionButton(inputId="go",
                                            label="Predict"),
-                            , width = 8 ),
+                             width = 8 ),
                             mainPanel(align="center",
                                       div(" ",
                                         style = "height: 20px; width: 200px;"
@@ -120,8 +118,11 @@ ui <- navbarPage(theme = shinytheme("paper"),
 #Server
 ###################################################################
 server <- function(input, output) {
+  
   text_reactive <- eventReactive(input$go,
             {
+              load("c50_smote.Rdata")
+              load("singlei_str.RData")
               new_obs <- test[0,]
               
               new_obs$Death.within.14.days <- NULL
